@@ -136,3 +136,27 @@ npx expo run:android
 # o también dependiendo de cómo esté en el package.json probar con npm run android
 ```
 Si todo está bien configurado, ¡tu código de Linux compilará y la app aparecerá mágicamente en el emulador de tu Windows!
+
+##Error final (por ahora)
+```Bash
+Error: could not connect to TCP port 5554: Connection refused
+Error: /home/powasote/Android/Sdk/platform-tools/adb -s emulator-5554 emu avd name exited with non-zero code: 1
+    at ChildProcess.completionListener (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/@expo/spawn-async/src/spawnAsync.ts:67:13)
+    at Object.onceWrapper (node:events:631:26)
+    at ChildProcess.emit (node:events:509:28)
+    at maybeClose (node:internal/child_process:1124:16)
+    at Process.ChildProcess._handle.onexit (node:internal/child_process:306:5)
+    ...
+    at spawnAsync (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/@expo/spawn-async/src/spawnAsync.ts:28:21)
+    at ADBServer.runAsync (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/android/ADBServer.ts:85:59)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at getAdbNameForDeviceIdAsync (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/android/adb.ts:329:19)
+    at /home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/android/adb.ts:312:14
+    at async Promise.all (index 0)
+    at getDevicesAsync (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/android/getDevices.ts:7:25)
+    at Object.resolveAsync [as resolveDeviceAsync] (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/android/AndroidDeviceManager.ts:41:21)
+    at AndroidPlatformManager.openProjectInExpoGoAsync (/home/powasote/proyects/fichYa/fichYa/frontend/node_modules/expo/node_modules/@expo/cli/src/start/platforms/PlatformManager.ts:109:27)
+    at async Promise.allSettled (index 0)
+```
+
+Al intentar ejecutar npm run android en la carpeta (/frontend) del proyecto.
