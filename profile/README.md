@@ -5,6 +5,9 @@
 
 Bienvenido/a al equipo. En esta guía configuraremos tu máquina Windows para que funcione como un entorno Linux puro utilizando **WSL2**. Esto nos evita problemas de compatibilidad y nos da un ecosistema limpio para Node, Python, Docker y React Native/Expo.
 
+## 🌟 Herramientas y Repos de Interés (Externos)
+
+[![Win11Debloat Card](https://github-readme-stats.vercel.app/api/pin/?username=Raphire&repo=Win11Debloat&theme=default&show_owner=true)](https://github.com/Raphire/Win11Debloat)
 ---
 
 ## FASE 1: La Terminal y WSL (El Núcleo)
