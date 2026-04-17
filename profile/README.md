@@ -77,40 +77,56 @@ Queremos que Docker corra en Windows pero que sea accesible desde nuestra termin
 
 - Entra en tu terminal Ubuntu y prueba que funciona escribiendo: docker ps.
 
-## FASE 4: El Puente con Android Studio (Expo / React Native)
-Para correr aplicaciones móviles, el emulador de Android debe ejecutarse en Windows (por la tarjeta gráfica), pero nuestro código se ejecuta en Linux. Vamos a conectarlos.
+## FASE 4: SDK de Android y Java en WSL (Para compilar)
+Para que comandos como expo run:android puedan compilar el código nativo, WSL necesita su propio Java y el SDK de Android.
 
-1. Instalación en Windows
-- Descarga e instala Android Studio (.exe normal).
-
-- Abre Android Studio, instala un emulador (Virtual Device) y déjalo abierto y corriendo.
-
-2. Configuración del Puente en WSL
-- Tenemos que decirle a nuestro Linux que se comunique con el emulador de Windows.
-
-- En tu terminal Ubuntu, instala las herramientas de Android:
+- Instala Java (JDK 17) y utilidades básicas:
 
 ```Bash
-sudo apt update && sudo apt install android-tools-adb -y
+sudo apt update && sudo apt install unzip openjdk-17-jdk android-tools-adb -y
 ```
-- Añade esta variable de entorno a tu Linux. Abre tu archivo de configuración (nano ~/.bashrc o ~/.zshrc si usas Zsh) y pega esto al final:
+- Descarga y extrae las herramientas de línea de comandos de Android:
 
 ```Bash
+mkdir -p ~/Android/Sdk/cmdline-tools
+wget [https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip](https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip) -O cmdline-tools.zip
+unzip cmdline-tools.zip -d ~/Android/Sdk/cmdline-tools
+rm cmdline-tools.zip
+mv ~/Android/Sdk/cmdline-tools/cmdline-tools ~/Android/Sdk/cmdline-tools/latest
+```
+- Acepta todas las licencias oficiales de Android (escribe y y presiona Enter a todo lo que salga):
+
+```Bash
+yes | ~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+```
+## FASE 5: El Puente con el Emulador de Windows
+El código se compila en Linux, pero el Emulador se ejecutará en Windows (para aprovechar la tarjeta gráfica).
+
+1. Variables de entorno en WSL
+Abre tu archivo de configuración en Linux (nano ~/.bashrc) y pega todo este bloque de configuración al final del documento:
+
+```Bash
+# Variables de Android SDK y ADB Bridge
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export ADB_SERVER_SOCKET=tcp:host.docker.internal:5037
 ```
-- Guarda (Ctrl+O, Enter) y sal (Ctrl+X). Reinicia la terminal.
+Guarda (Ctrl+O, Enter) y sal (Ctrl+X). Reinicia la terminal de Ubuntu.
 
-3. Exponer el servidor en Windows
-- En Windows, abre un PowerShell como Administrador (solo PowerShell sirve para esto).
+2. Exponer el servidor en Windows
+En Windows, abre Android Studio (.exe normal), ve al "Device Manager" y arranca tu Emulador. Déjalo abierto.
 
-- Mata cualquier servidor ADB viejo y arranca uno que escuche en todos los puertos:
+- Abre una ventana de PowerShell como Administrador en Windows y ejecuta:
 
 ```PowerShell
 adb kill-server
 adb -a nodaemon server start
 ```
-> [!WARN]
-> (Deja esa ventana de PowerShell abierta en segundo plano).
+
+> [!WARNING]
+> Deja esta ventana negra de PowerShell abierta y minimizada. Esto es lo que permite que WSL se conecte a tu emulador.
 
 ### ¡Prueba Final!
 Ve a tu terminal de Ubuntu, entra en tu proyecto de Expo y ejecuta:
