@@ -137,7 +137,7 @@ npx expo run:android
 ```
 Si todo está bien configurado, ¡tu código de Linux compilará y la app aparecerá mágicamente en el emulador de tu Windows!
 
-##Error final (por ahora)
+## Error final (por ahora)
 ```Bash
 Error: could not connect to TCP port 5554: Connection refused
 Error: /home/powasote/Android/Sdk/platform-tools/adb -s emulator-5554 emu avd name exited with non-zero code: 1
