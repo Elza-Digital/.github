@@ -89,7 +89,7 @@ sudo apt update && sudo apt install unzip openjdk-17-jdk android-tools-adb -y
 
 ```Bash
 mkdir -p ~/Android/Sdk/cmdline-tools
-wget [https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip](https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip) -O cmdline-tools.zip
+wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O cmdline-tools.zip
 unzip cmdline-tools.zip -d ~/Android/Sdk/cmdline-tools
 rm cmdline-tools.zip
 mv ~/Android/Sdk/cmdline-tools/cmdline-tools ~/Android/Sdk/cmdline-tools/latest
