@@ -34,7 +34,7 @@ Para instalar Node y npm, usaremos NVM, que nos permite cambiar de versión fác
 - Ejecuta en tu terminal Ubuntu:
 
 ```Bash
-curl -o- [https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh](https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh) | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 - Cierra la terminal y vuelve a abrirla. Luego instala la última versión de Node:
 
@@ -51,7 +51,7 @@ sudo apt update && sudo apt install build-essential libssl-dev zlib1g-dev libbz2
 - Instala Pyenv:
 
 ```Bash
-curl [https://pyenv.run](https://pyenv.run) | bash
+curl https://pyenv.run | bash
 ```
 > [!NOTE]
 > El instalador te pedirá que copies 3 líneas al final de tu archivo ~/.bashrc. Hazlo, guarda el archivo y reinicia la terminal.
